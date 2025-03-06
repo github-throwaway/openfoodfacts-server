@@ -1191,6 +1191,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#macos-prerequisites-installing-gnu-grep-for-full-regex-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      MacOS Prerequisites: Installing GNU grep for Full Regex Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MacOS Prerequisites: Installing GNU grep for Full Regex Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-install-gnu-grep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Install GNU grep
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#windows-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       Windows Prerequisites
@@ -1389,6 +1413,15 @@
   <a href="#make-dev-error-build_lang-error-13-cant-write-into-mntpodatadatalangopenfoodfactslocalhoststo" class="md-nav__link">
     <span class="md-ellipsis">
       make dev error: [build_lang] Error 13 - can't write into /mnt/podata/data/Lang.openfoodfacts.localhost.sto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-dev-error-build-error-1-failed-to-solve-process-binsh-c-usermod-uid-user_uid-www-data-groupmod-gid-user_gid-www-data-did-not-complete-successfully-exit-code-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      make dev error: [build] Error 1 - failed to solve: process "/bin/sh -c usermod --uid $USER_UID www-data &amp;&amp; groupmod --gid $USER_GID www-data" did not complete successfully: exit code: 4
     </span>
   </a>
   
@@ -1804,6 +1837,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#macos-prerequisites-installing-gnu-grep-for-full-regex-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      MacOS Prerequisites: Installing GNU grep for Full Regex Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MacOS Prerequisites: Installing GNU grep for Full Regex Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-install-gnu-grep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Install GNU grep
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#windows-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       Windows Prerequisites
@@ -2007,6 +2064,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#make-dev-error-build-error-1-failed-to-solve-process-binsh-c-usermod-uid-user_uid-www-data-groupmod-gid-user_gid-www-data-did-not-complete-successfully-exit-code-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      make dev error: [build] Error 1 - failed to solve: process "/bin/sh -c usermod --uid $USER_UID www-data &amp;&amp; groupmod --gid $USER_GID www-data" did not complete successfully: exit code: 4
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2051,10 +2117,57 @@ to instantly provision a ready-to-code development environment in the cloud.</p>
 <ul>
 <li>GIT version &gt;= 2.25.0</li>
 <li><a href="https://docs.docker.com/engine/install/">Install Docker CE</a><blockquote>
-<p>If you run e.g. Debian, don't forget to add your user to the <code>docker</code> group!</p>
+<p>If you run e.g. Debian, don't forget to add your user to the <code>docker</code> group!  </p>
 </blockquote>
 </li>
 </ul>
+<h3 id="macos-prerequisites-installing-gnu-grep-for-full-regex-support">MacOS Prerequisites: Installing GNU grep for Full Regex Support<a class="headerlink" href="#macos-prerequisites-installing-gnu-grep-for-full-regex-support" title="Permanent link">#</a></h3>
+<p>On macOS, the default version of <strong>grep</strong> is BSD grep, which does not support certain GNU-specific options—most notably, the <code>-P</code> flag for Perl-compatible regular expressions. If you encounter errors like:</p>
+<div class="highlight"><pre><span></span><code><span class="go">grep: invalid option -- P</span>
+<span class="go">usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]] …</span>
+</code></pre></div>
+<p>You can resolve the issue by installing GNU grep and prioritizing it in your shell's PATH.</p>
+<h4 id="steps-to-install-gnu-grep">Steps to Install GNU grep<a class="headerlink" href="#steps-to-install-gnu-grep" title="Permanent link">#</a></h4>
+<ol>
+<li>
+<p><strong>Install GNU grep via Homebrew:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="go">brew install grep</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Update Your PATH:</strong></p>
+<p>Add the following line to your <code>~/.zshrc</code> (or your shell’s configuration file):</p>
+<div class="highlight"><pre><span></span><code><span class="go">export PATH=&quot;$(brew --prefix grep)/libexec/gnubin:$PATH&quot;</span>
+</code></pre></div>
+<p>This ensures that the GNU version (often available as <code>ggrep</code>) is used by default instead of BSD grep.</p>
+</li>
+<li>
+<p><strong>Apply the Changes:</strong></p>
+<p>Restart your terminal or run:</p>
+<div class="highlight"><pre><span></span><code><span class="go">source ~/.zshrc</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Verify Installed Version:</strong></p>
+</li>
+</ol>
+<p>Run the following command to ensure that GNU grep is installed and properly configured:</p>
+<div class="highlight"><pre><span></span><code><span class="go">grep --version</span>
+</code></pre></div>
+<p>You should see an output similar to the example below, indicating that GNU grep (with Homebrew packaging) is active and supports the <code>-P</code> option via PCRE2:</p>
+<div class="highlight"><pre><span></span><code><span class="go">grep (GNU grep) 3.11</span>
+<span class="go">Packaged by Homebrew</span>
+<span class="go">Copyright (C) 2023 Free Software Foundation, Inc.</span>
+<span class="go">License GPLv3+: GNU GPL version 3 or later &lt;https://gnu.org/licenses/gpl.html&gt;.</span>
+<span class="go">This is free software: you are free to change and redistribute it.</span>
+<span class="go">There is NO WARRANTY, to the extent permitted by law.</span>
+
+<span class="go">Written by Mike Haertel and others; see</span>
+<span class="go">&lt;https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS&gt;.</span>
+
+<span class="go">grep -P uses PCRE2 10.44 2024-06-07</span>
+</code></pre></div>
+<p>After completing these steps, running grep commands (for example, as part of <code>make log</code>) will use GNU grep with full support for options like <code>-P</code>.</p>
 <h3 id="windows-prerequisites">Windows Prerequisites<a class="headerlink" href="#windows-prerequisites" title="Permanent link">#</a></h3>
 <p>When running with Windows, install <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> <strong>which will cover all of the above</strong>.</p>
 <p>The Make tasks use a number of Linux commands, such as rm and nproc, so it is recommended to run Make commands from the Git Bash shell. In addition, the following need to be installed and included in the PATH:</p>
@@ -2386,6 +2499,35 @@ To know more about docker compose commands do read <a href="../how-to-develop-us
 </code></pre></div>
 <p><strong>Solution:</strong></p>
 <p>Use the powershell/cmd to run the make dev commands in windows.</p>
+<h3 id="make-dev-error-build-error-1-failed-to-solve-process-binsh-c-usermod-uid-user_uid-www-data-groupmod-gid-user_gid-www-data-did-not-complete-successfully-exit-code-4">make dev error: [build] Error 1 - failed to solve: process "/bin/sh -c usermod --uid $USER_UID www-data &amp;&amp; groupmod --gid $USER_GID www-data" did not complete successfully: exit code: 4<a class="headerlink" href="#make-dev-error-build-error-1-failed-to-solve-process-binsh-c-usermod-uid-user_uid-www-data-groupmod-gid-user_gid-www-data-did-not-complete-successfully-exit-code-4" title="Permanent link">#</a></h3>
+<p><strong>On WSL(for root user)</strong>
+When using <code>make dev</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="go">&lt;p&gt;</span>
+<span class="go">------</span>
+<span class="go"> &gt; [backend modperl 5/5] RUN usermod --uid 0 www-data &amp;&amp;     groupmod --gid 1000 www-data:</span>
+<span class="go">0.492 usermod: UID &#39;0&#39; already exists</span>
+<span class="go">------</span>
+<span class="go">failed to solve: process &quot;/bin/sh -c usermod --uid $USER_UID www-data &amp;&amp;     groupmod --gid $USER_GID www-data&quot; did not complete successfully: exit code: 4</span>
+<span class="go">&lt;/p&gt;</span>
+<span class="go">make: *** [Makefile:147: build] Error 1</span>
+</code></pre></div>
+<p><strong>Solution:</strong></p>
+<p>Reason for the error: 
+"usermod: UID '0' already exists" means that the user is being assigned UID 0, which is already used by the root user.</p>
+<p>To solve it create an environment variable(USER_UID=1000) inside .envrc using direnv. Steps to do that:</p>
+<p>Install direnv
+<div class="highlight"><pre><span></span><code><span class="go">sudo apt install direnv</span>
+</code></pre></div></p>
+<p>Enable direnv for Your Shell
+<div class="highlight"><pre><span></span><code><span class="go">echo &#39;eval &quot;$(direnv hook bash)&quot;&#39; &gt;&gt; ~/.bashrc</span>
+<span class="go">source ~/.bashrc</span>
+</code></pre></div></p>
+<p>Create a .envrc File in Your Project
+<div class="highlight"><pre><span></span><code><span class="go">echo &#39;USER_UID=1000&#39; &gt; .envrc</span>
+</code></pre></div></p>
+<p>Finally, run this to allow .envrc:
+<div class="highlight"><pre><span></span><code><span class="go">direnv allow</span>
+</code></pre></div></p>
 
 
 
